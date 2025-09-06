@@ -20,6 +20,7 @@ class CoursesCubit extends Cubit<CoursesState> {
   String categoryId = '';
   final preferences = sl<PreferencesService>();
   int? createdCourseId;
+
   Map<String, dynamic> get data => {
     'category_id': categoryId,
     'name': nameController.text.trim(),

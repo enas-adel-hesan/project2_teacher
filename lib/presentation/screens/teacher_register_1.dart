@@ -95,6 +95,11 @@ class TeacherRegister1 extends StatelessWidget {
                                   await cubit.register();
                                 },
                               ),
+                              SizedBox(height: 5,),
+                              if(state is LoadingState)
+
+                                   Center(child: CircularProgressIndicator(),),
+
 
                               Redirect(
                                 title: RegisterStrings.alreadyHaveAccount,

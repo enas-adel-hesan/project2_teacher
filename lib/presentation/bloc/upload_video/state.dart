@@ -1,3 +1,7 @@
+import 'package:teacher/data/models/course_model.dart';
+
+import '../../../data/models/course_details_model.dart';
+
 class UploadVideoState {
 }
 
@@ -8,6 +12,10 @@ class ErrorState extends UploadVideoState{
   ErrorState(this.message);
 }
 class SuccessState extends UploadVideoState{}
+class SuccessStateDetails extends UploadVideoState{
+  CourseDetailsModel course;
+  SuccessStateDetails(this.course);
+}
 class UploadProgressState extends UploadVideoState {
   final double progress;
   UploadProgressState(this.progress);

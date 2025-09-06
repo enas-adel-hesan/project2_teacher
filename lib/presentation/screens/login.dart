@@ -62,7 +62,10 @@ class _BuildLoginPage extends StatelessWidget {
                             cubit.formKey.currentState?.validate(); //
                           } else {
                             if (state is SuccessState) {
-                              Navigator.pushReplacementNamed(context, Routes.home);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.home,
+                              );
                             }
                           }
                         },
@@ -107,6 +110,7 @@ class _BuildLoginPage extends StatelessWidget {
                                   },
                                   label: RegisterStrings.password,
                                 ),
+
                                 if (state is ErrorState)
                                   ErrorMessageWidget(message: state.message),
                                 CustomElevatedButton(
@@ -115,7 +119,9 @@ class _BuildLoginPage extends StatelessWidget {
                                     cubit.login();
                                   },
                                 ),
-
+                                SizedBox(height: 5,),
+                                if (state is LoadingState)
+                                  Center(child: CircularProgressIndicator()),
                                 Redirect(
                                   title: RegisterStrings.doNotHaveAccount,
                                   textButton: RegisterStrings.signUp,
@@ -142,4 +148,3 @@ class _BuildLoginPage extends StatelessWidget {
     );
   }
 }
-

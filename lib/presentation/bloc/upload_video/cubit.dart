@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http_parser/http_parser.dart'; // لـ MediaType
+import 'package:teacher/data/models/course_details_model.dart';
+import 'package:teacher/data/models/course_model.dart';
 import '../../../app_links.dart';
 import '../../../core/errors/network/network_info.dart';
 import '../../../core/network/dio_client.dart';
@@ -38,12 +40,10 @@ class UploadVideoCubit extends Cubit<UploadVideoState> {
       return;
     }
 
-
     emit(LoadingState());
 
     try {
       FormData formData = FormData.fromMap({
-
         'video': MultipartFile.fromBytes(
           pickedFile!.bytes!,
           filename: pickedFile!.name,
@@ -67,6 +67,36 @@ class UploadVideoCubit extends Cubit<UploadVideoState> {
       uploadProgress = 0.0;
     } catch (e) {
       emit(ErrorState("Error while uploading: $e"));
+    }
+  }
+
+  Future<void> createQuiz(Map<String, dynamic> payload) async {
+    emit(LoadingState());
+    try {
+      final _ = await DioHelper.postData(
+        url: AppLinks.addExam, // endpoint تبعك
+        data: payload,
+      );
+
+      emit(SuccessState());
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+    }
+  }
+
+  CourseDetailsModel? course;
+
+  Future<void> getCourseDetails(int courseId) async {
+    emit(LoadingState());
+    try {
+      final response = await DioHelper.getData(
+        url: "${AppLinks.courseDetails}/$courseId", // endpoint تبعك
+      );
+      course = CourseDetailsModel.fromJson(response.data);
+
+      emit(SuccessStateDetails(course!));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
     }
   }
 }

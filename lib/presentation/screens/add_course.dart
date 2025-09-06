@@ -28,13 +28,11 @@ class AddCourse extends StatelessWidget {
             child: BlocConsumer<CoursesCubit, CoursesState>(
               listener: (context, state) {
                 if (state is SuccessState) {
-
                   showSuccessFlushBar(context).then((_) {
                     Navigator.pushReplacementNamed(
                       context,
                       Routes.courseDetails,
                       arguments: state.cId,
-
                     );
                   });
 
@@ -69,12 +67,14 @@ class AddCourse extends StatelessWidget {
                           onChanged: (value) => cubit.setCategoryId(value),
                           label: "Select Category",
                           items: categories!,
+
                         ),
 
                         // Title
                         CustomTextField(
                           label: "Course Title",
                           controller: cubit.nameController,
+
                         ),
 
                         // Description
@@ -89,6 +89,7 @@ class AddCourse extends StatelessWidget {
                           label: "Price",
                           controller: cubit.priceController,
                           keyboardType: TextInputType.number,
+                          suffixIcon:Icon(Icons.attach_money),
                         ),
 
                         if (state is ErrorState)

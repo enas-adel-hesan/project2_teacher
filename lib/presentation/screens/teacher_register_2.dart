@@ -94,6 +94,10 @@ class TeacherRegister2 extends StatelessWidget {
                                     cubit.gender = value;
                                   },
                                 ),
+                                SizedBox(height: 5,),
+                                if(state is LoadingState)
+
+                                  Center(child: CircularProgressIndicator(),),
                                 CustomElevatedButton(
                                   title: "Next",
                                   onPressed: () {

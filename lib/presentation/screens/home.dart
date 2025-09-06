@@ -19,8 +19,16 @@ class SelectedItemCubit extends Cubit<int> {
 }
 
 // Main Widget
+// Home
 class Home extends StatelessWidget {
   const Home({super.key});
+
+  static final List<Widget> _pages = [
+    const Center(child: Text("Dashboard Page")),
+    const Courses(),
+    const Center(child: Text("Students Page")),
+    const Center(child: Text("Settings Page")),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +38,31 @@ class Home extends StatelessWidget {
         BlocProvider(create: (_) => SelectedItemCubit()),
       ],
       child: Scaffold(
-
         body: Row(
-          children: const [
-            AnimatedSidebar(),
-            Expanded(child: Scaffold(body: Courses())),
+          children: [
+            const AnimatedSidebar(),
+            Expanded(
+              child: BlocBuilder<SelectedItemCubit, int>(
+                builder: (context, selectedIndex) {
+                  return Scaffold(
+                    body: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 400),
+                      transitionBuilder: (child, anim) => FadeTransition(
+                        opacity: anim,
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(0.1, 0),
+                            end: Offset.zero,
+                          ).animate(anim),
+                          child: child,
+                        ),
+                      ),
+                      child: _pages[selectedIndex],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

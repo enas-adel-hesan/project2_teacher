@@ -43,7 +43,7 @@ class TeacherRegister3 extends StatelessWidget {
                           }
                         }
                         if(state is SuccessState){
-                          Navigator.pushReplacementNamed(context, Routes.home);
+                          Navigator.pushReplacementNamed(context, Routes.successRegister);
                         }
                       },
                       builder: (context, state) {
@@ -91,7 +91,10 @@ class TeacherRegister3 extends StatelessWidget {
                                   label: RegisterStrings.aboutYou,
                                 ),
                               ),
+                              SizedBox(height: 5,),
+                              if(state is LoadingState)
 
+                                Center(child: CircularProgressIndicator(),),
                               CustomElevatedButton(
                                 title: "Next",
                                 onPressed: () {

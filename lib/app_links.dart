@@ -6,11 +6,17 @@ class AppLinks {
   static const String register = "teacher/register";
   static const String login = "login";
   //2=============
-  static const String categories = "categories";
+
   static const String addCourse = "courses/add";
   static const String uploadVideo = "courses/uploadVideo/";
+  static const String myCourses = "my-courses";
+  static const String addExam = "exams";
+  static const String courseDetails = "courses/";
+
+  //..........................................................
 
 
-  static const String myCourses = "categories";
+  static const String categories = "categories";
+
 
 }
